@@ -1,0 +1,31 @@
+{
+  "contentVersion": "1.0.0",
+  "id": "orbit-tagging-policy",
+  "properties": {
+    "displayName": "Orbit Multi-Cloud Tagging Policy",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "description": "Zorunlu kurumsal etiketleri (Environment, Owner, CostCenter) kontrol eder.",
+    "policyRule": {
+      "if": {
+        "anyOf": [
+          {
+            "field": "tags['Environment']",
+            "exists": "false"
+          },
+          {
+            "field": "tags['Owner']",
+            "exists": "false"
+          },
+          {
+            "field": "tags['CostCenter']",
+            "exists": "false"
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
