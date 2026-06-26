@@ -2,6 +2,7 @@
 resource "google_compute_network" "custom_vpc" {
   name                    = "orbit-gcp-vpc"
   auto_create_subnetworks = false
+  depends_on = [google_project_service.compute_api]
 }
 
 # 2. Subnet Açılması
@@ -26,6 +27,13 @@ resource "google_compute_firewall" "allow_iap" {
   target_tags   = ["iap-ssh-enabled"]
 }
 
+
+resource "google_project_service" "compute_api" {
+  project = var.gcp_project_id
+  service = "compute.googleapis.com"
+
+  disable_on_destroy = false
+}
 # 4. Compute Engine Instance (Dışarıya tamamen kapalı, Public IP'siz)
 resource "google_compute_instance" "recommendation_engine" {
   name         = "orbit-recommendation-engine"

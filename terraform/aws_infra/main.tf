@@ -125,7 +125,7 @@ resource "aws_lb_listener" "http" {
 resource "aws_launch_template" "aws_web_tpl" {
   name_prefix   = "orbit-web-tpl-"
   image_id      = "ami-0c7217cdde317cfec" 
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
   network_interfaces {
     associate_public_ip_address = false
     security_groups             = [aws_security_group.ec2_sg.id]

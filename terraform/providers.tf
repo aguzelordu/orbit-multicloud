@@ -13,11 +13,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "YOUR_AWS_BUCKET_NAME" 
+    bucket         = "orbit-3-state-bucket-1782489922" #Your S3 bucket name
     key            = "orbit-multi/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "terraform-state-lock"
-    encrypt        = true
+    use_lockfile = true
   }
 }
 
